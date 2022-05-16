@@ -1,11 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+>
+<h:head/>
+<h:body>
+    <h2>Stores:</h2>
+    <ol>
+        <ui:repeat value="#{stores.allStores}" var="store">
+            <li><h:link value="#{store.name}" outcome="computers?storeId=#{store.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText value="#{stores.storeToCreate.name}" required="true" />
+        <h:commandButton value="Add new store" actionListener="#{stores.createStore}" action="index?faces-redirect=true"/>
+    </h:form>
+</h:body>
 </html>
