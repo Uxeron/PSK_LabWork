@@ -25,4 +25,8 @@ public class Computer {
 
     @ManyToOne
     private Store store;
+
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
 }

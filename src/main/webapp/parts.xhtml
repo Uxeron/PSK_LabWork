@@ -7,7 +7,16 @@
       xmlns:f="http://java.sun.com/jsf/core">
 <h:head/>
 <h:body>
-    <h2>Parts used in #{partsForComputer.computer.name} computer:</h2>
+    <h2>Computer #{partsForComputer.computer.name}</h2>
+    <h:form>
+        <h:outputText value="Computer name: "/>
+        <h:inputText a:placeholder="#{partsForComputer.computer.name}" value="#{partsForComputer.computer.name}" required="true" />
+        <h:commandButton value="update" action="#{updateComputerDetails.updateComputerName()}">
+            <f:param name="computerId" value="#{partsForComputer.computer.id}" />
+        </h:commandButton>
+        <h:outputText value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+    </h:form>
+    <h4>Parts used in computer:</h4>
     <ol>
         <ui:repeat value="#{partsForComputer.computer.parts}" var="part">
             <li>

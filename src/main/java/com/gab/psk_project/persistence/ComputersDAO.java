@@ -23,4 +23,13 @@ public class ComputersDAO {
     public Computer findOne(Long id) {
         return em.find(Computer.class, id);
     }
+
+    public Computer update(Computer computer){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
+
+        return em.merge(computer);
+    }
 }
