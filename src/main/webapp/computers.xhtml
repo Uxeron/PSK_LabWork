@@ -11,7 +11,7 @@
     <ol>
         <ui:repeat value="#{computersForStore.store.computers}" var="computer">
             <li>
-                <h:link value="#{computer.name} #{computer.price}" outcome="parts?computerId=#{computer.id}" />
+                <h:link value="#{computer.name} #{computer.price}€" outcome="parts?computerId=#{computer.id}" />
             </li>
         </ui:repeat>
     </ol>
@@ -21,6 +21,12 @@
         <h:commandButton value="Add computer to the store"
                          actionListener="#{computersForStore.createComputer}"
                          action="#{'computers?faces-redirect=true&amp;storeId='.concat(computersForStore.store.id)}">
+            <f:param name="storeId" value="#{computersForStore.store.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:form>
+        <h:outputText value="#{generateComputerName.nameGenerationStatus}" />
+        <h:commandButton value="Generate computer number?" disabled="#{generateComputerName.nameGenerationRunning}" action="#{generateComputerName.generateNewComputerName()}">
             <f:param name="storeId" value="#{computersForStore.store.id}" />
         </h:commandButton>
     </h:form>
