@@ -2,6 +2,7 @@ package com.gab.psk_project.usercases;
 
 import com.gab.psk_project.entities.Computer;
 import com.gab.psk_project.entities.Part;
+import com.gab.psk_project.interceptors.LoggedInvocation;
 import com.gab.psk_project.persistence.ComputersDAO;
 import com.gab.psk_project.persistence.PartsDAO;
 import lombok.Getter;
@@ -43,14 +44,14 @@ public class ExistingPart implements Serializable {
     }
 
     @Transactional
-    //@LoggedInvocation
+    @LoggedInvocation
     public void addPart() {
         part.getComputers().add(computer);
         computer.getParts().add(part);
     }
 
     @Transactional
-    //@LoggedInvocation
+    @LoggedInvocation
     public void removePart() {
         part.getComputers().remove(computer);
         computer.getParts().remove(part);

@@ -1,6 +1,7 @@
 package com.gab.psk_project.usercases;
 
 import com.gab.psk_project.entities.Computer;
+import com.gab.psk_project.interceptors.LoggedInvocation;
 import com.gab.psk_project.persistence.ComputersDAO;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +37,7 @@ public class UpdateComputerDetails  implements Serializable {
     }
 
     @Transactional
-    // @LoggedInvocation
+    @LoggedInvocation
     public String updateComputerName() {
         try{
             computersDAO.update(this.computer);

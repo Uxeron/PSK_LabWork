@@ -2,6 +2,7 @@ package com.gab.psk_project.usercases;
 
 import com.gab.psk_project.entities.Computer;
 import com.gab.psk_project.entities.Store;
+import com.gab.psk_project.interceptors.LoggedInvocation;
 import com.gab.psk_project.persistence.ComputersDAO;
 import com.gab.psk_project.persistence.StoresDAO;
 import lombok.Getter;
@@ -40,7 +41,7 @@ public class ComputersForStore implements Serializable {
     }
 
     @Transactional
-    //@LoggedInvocation
+    @LoggedInvocation
     public void createComputer() {
         computerToCreate.setStore(this.store);
         computersDAO.persist(computerToCreate);

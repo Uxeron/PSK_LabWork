@@ -2,10 +2,9 @@ package com.gab.psk_project.usercases;
 
 import com.gab.psk_project.entities.Computer;
 import com.gab.psk_project.entities.Part;
-import com.gab.psk_project.entities.Store;
+import com.gab.psk_project.interceptors.LoggedInvocation;
 import com.gab.psk_project.persistence.ComputersDAO;
 import com.gab.psk_project.persistence.PartsDAO;
-import com.gab.psk_project.persistence.StoresDAO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -50,7 +49,7 @@ public class PartsForComputer implements Serializable {
     }
 
     @Transactional
-    //@LoggedInvocation
+    @LoggedInvocation
     public void createPart() {
         partToCreate.setComputers(Arrays.asList(this.computer));
         partsDAO.persist(partToCreate);

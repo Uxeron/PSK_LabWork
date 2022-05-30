@@ -1,5 +1,6 @@
 package com.gab.psk_project.usercases;
 
+import com.gab.psk_project.interceptors.LoggedInvocation;
 import com.gab.psk_project.services.ComputerNameGenerator;
 
 import javax.enterprise.context.SessionScoped;
@@ -19,7 +20,7 @@ public class GenerateComputerName implements Serializable {
 
     private CompletableFuture<String> computerNameGenerationTask = null;
 
-    // @LoggedInvocation
+    @LoggedInvocation
     public String generateNewComputerName() {
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();

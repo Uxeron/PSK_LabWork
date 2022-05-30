@@ -1,6 +1,7 @@
 package com.gab.psk_project.usercases;
 
 import com.gab.psk_project.entities.Store;
+import com.gab.psk_project.interceptors.LoggedInvocation;
 import com.gab.psk_project.persistence.StoresDAO;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,7 @@ public class Stores {
     }
 
     @Transactional
+    @LoggedInvocation
     public void createStore(){
         this.storesDAO.persist(storeToCreate);
     }
