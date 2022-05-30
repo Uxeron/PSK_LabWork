@@ -20,7 +20,13 @@
     <ol>
         <ui:repeat value="#{partsForComputer.computer.parts}" var="part">
             <li>
-                <h:outputText value="#{part.name}"/>
+                <h:form>
+                    <h:outputText value="#{part.name} "/>
+                    <h:commandButton value="Remove" action="#{existingPart.removePart()}">
+                        <f:param name="computerId" value="#{partsForComputer.computer.id}" />
+                        <f:param name="partId" value="#{part.id}" />
+                    </h:commandButton>
+                </h:form>
             </li>
         </ui:repeat>
     </ol>
@@ -32,6 +38,20 @@
             <f:param name="computerId" value="#{partsForComputer.computer.id}" />
         </h:commandButton>
     </h:form>
+    <h4>Existing parts:</h4>
+    <ol>
+        <ui:repeat value="#{partsForComputer.allParts}" var="part">
+            <li>
+                <h:form>
+                    <h:outputText value="#{part.name} "/>
+                    <h:commandButton value="Add" action="#{existingPart.addPart()}">
+                        <f:param name="computerId" value="#{partsForComputer.computer.id}" />
+                        <f:param name="partId" value="#{part.id}" />
+                    </h:commandButton>
+                </h:form>
+            </li>
+        </ui:repeat>
+    </ol>
     <h:link outcome="computers?storeId=#{partsForComputer.computer.store.id}" value="Back to store page"/>
 </h:body>
 </html>

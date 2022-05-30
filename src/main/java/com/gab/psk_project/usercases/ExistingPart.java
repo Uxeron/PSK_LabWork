@@ -2,10 +2,8 @@ package com.gab.psk_project.usercases;
 
 import com.gab.psk_project.entities.Computer;
 import com.gab.psk_project.entities.Part;
-import com.gab.psk_project.entities.Store;
 import com.gab.psk_project.persistence.ComputersDAO;
 import com.gab.psk_project.persistence.PartsDAO;
-import com.gab.psk_project.persistence.StoresDAO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,12 +13,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 @Model
-public class PartsForComputer implements Serializable {
+public class ExistingPart implements Serializable {
 
     @Inject
     private ComputersDAO computersDAO;
@@ -34,25 +30,29 @@ public class PartsForComputer implements Serializable {
 
     @Getter
     @Setter
-    private Part partToCreate = new Part();
-
-    @Getter
-    @Setter
-    private List<Part> allParts;
+    private Part part;
 
     @PostConstruct
     public void init() {
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         Long computerId = Long.parseLong(requestParameters.get("computerId"));
+        Long partId = Long.parseLong(requestParameters.get("partId"));
         this.computer = computersDAO.findOne(computerId);
-        this.allParts = partsDAO.loadAll();
+        this.part = partsDAO.findOne(partId);
     }
 
     @Transactional
     //@LoggedInvocation
-    public void createPart() {
-        partToCreate.setComputers(Arrays.asList(this.computer));
-        partsDAO.persist(partToCreate);
+    public void addPart() {
+        part.getComputers().add(computer);
+        computer.getParts().add(part);
+    }
+
+    @Transactional
+    //@LoggedInvocation
+    public void removePart() {
+        part.getComputers().remove(computer);
+        computer.getParts().remove(part);
     }
 }
