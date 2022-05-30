@@ -25,11 +25,6 @@ public class ComputersDAO {
     }
 
     public Computer update(Computer computer){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-        }
-
         return em.merge(computer);
     }
 }

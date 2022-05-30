@@ -1,5 +1,6 @@
 package com.gab.psk_project.persistence;
 
+import com.gab.psk_project.entities.Computer;
 import com.gab.psk_project.entities.Part;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -23,4 +24,6 @@ public class PartsDAO {
     public Part findOne(Long id) {
         return em.find(Part.class, id);
     }
+
+    public Part update(Part part){ return em.merge(part); }
 }
