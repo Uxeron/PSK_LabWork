@@ -40,6 +40,11 @@ public class UpdateComputerDetails  implements Serializable {
     @LoggedInvocation
     public String updateComputerName() {
         try{
+            try {
+                Thread.sleep(3000); // Simulate intensive work
+            } catch (InterruptedException e) {
+            }
+
             computersDAO.update(this.computer);
         } catch (OptimisticLockException e) {
             return "/parts.xhtml?faces-redirect=true&computerId=" + this.computer.getId() + "&error=optimistic-lock-exception";

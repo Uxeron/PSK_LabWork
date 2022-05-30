@@ -19,4 +19,8 @@ public class Part {
 
     @ManyToMany
     private List<Computer> computers;
+
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
 }

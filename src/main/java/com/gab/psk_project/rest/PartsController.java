@@ -15,7 +15,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.List;
 
 @ApplicationScoped
 @Path("/parts")
@@ -62,6 +61,12 @@ public class PartsController {
             if (existingPart == null) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
+
+            try {
+                Thread.sleep(3000); // Simulate intensive work
+            } catch (InterruptedException e) {
+            }
+
             existingPart.setName(partData.getName());
             partsDAO.update(existingPart);
             return Response.ok(partToData(existingPart)).build();

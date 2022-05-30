@@ -25,6 +25,8 @@ public class ComputersDAO {
     }
 
     public Computer update(Computer computer){
-        return em.merge(computer);
+        Computer updated_computer = em.merge(computer);
+        em.flush();
+        return updated_computer;
     }
 }
